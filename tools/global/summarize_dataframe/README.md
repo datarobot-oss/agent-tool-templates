@@ -11,7 +11,12 @@ To call or invoke the tool, send a properly formatted JSON request to the deploy
 Please refer to the [making predictions](../README.md#making-predictions) section of documentation for global tools for more technical details on how to call the tool.
 
 ### Input structure
-When invoking the tool, provide a JSON request as input. Example `request.json` file:
+When invoking the tool, provide a JSON request as input. The JSON request must include a top-level `payload` object. All parameters listed below should be placed inside this payload object, which will be forwarded to the tool.
+
+**Payload parameters**:
+- `dataframe` (string): CSV-formatted string with column names in the first row and data in the following rows.
+
+Example:
 
 ```json
 {
@@ -20,11 +25,6 @@ When invoking the tool, provide a JSON request as input. Example `request.json` 
     }
 }
 ```
-
-The JSON request must include a top-level `payload` object. All parameters listed below should be placed inside this payload object, which will be forwarded to the tool.
-
-**Payload parameters**:
-- `dataframe` (string): CSV-formatted string with column names in the first row and data in the following rows.
 
 ### Output structure
 The output will be a JSON response with the result containing the summary in the markdown format.

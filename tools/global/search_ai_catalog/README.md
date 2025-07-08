@@ -10,7 +10,13 @@ To call or invoke the tool, send a properly formatted JSON request to the deploy
 Please refer to the [making predictions](../README.md#making-predictions) section of documentation for global tools for more technical details on how to call the tool.
 
 ### Input structure
-When invoking the tool, provide a JSON request as input. Example `request.json` file:
+When invoking the tool, provide a JSON request as input. The JSON request must include a top-level `payload` object. All parameters listed below should be placed inside this payload object, which will be forwarded to the tool.
+
+**Payload parameters**:
+- `search_terms` (string): Search terms to filter datasets. Leave empty to return all datasets.
+- `limit` (integer, optional, default: 20): Maximum number of datasets to return. Use `-1` to return all.
+
+Example:
 
 ```json
 {
@@ -20,12 +26,6 @@ When invoking the tool, provide a JSON request as input. Example `request.json` 
     }
 }
 ```
-
-The JSON request must include a top-level `payload` object. All parameters listed below should be placed inside this payload object, which will be forwarded to the tool.
-
-**Payload parameters**:
-- `search_terms` (string): Search terms to filter datasets. Leave empty to return all datasets.
-- `limit` (integer, optional, default: 20): Maximum number of datasets to return. Use `-1` to return all.
 
 ### Output structure
 The output will be a JSON response with the result containing the summary in the markdown format.
