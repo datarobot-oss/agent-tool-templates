@@ -21,6 +21,11 @@ When invoking the tool, provide a JSON request as input. Example `request.json` 
 }
 ```
 
+The JSON request must include a top-level `payload` object. All parameters listed below should be placed inside this payload object, which will be forwarded to the tool.
+
+**Payload parameters**:
+- `dataframe` (string): CSV-formatted string with column names in the first row and data in the following rows.
+
 ### Output structure
 The output will be a JSON response with the result containing the summary in the markdown format.
 
