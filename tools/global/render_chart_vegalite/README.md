@@ -14,7 +14,7 @@ Please refer to the [making predictions](../README.md#making-predictions) sectio
 When invoking the tool, provide a JSON request as input. The JSON request must include a top-level `payload` object. All parameters listed below should be placed inside this payload object, which will be forwarded to the tool.
 
 **Payload parameters**:
-- `vegalite_spec` (string): (string): The Vega-Lite JSON specification, serialized as a string. This specification defines the chart to be rendered. If the `data` field contains an AI Catalog `dataset_id`, the tool will automatically fetch the dataset and generate the chart.  
+- `vegalite_spec` (string): The Vega-Lite JSON specification, serialized as a string. This specification defines the chart to be rendered. If the `data` field contains an AI Catalog `dataset_id`, the tool will automatically fetch the dataset and generate the chart.  
 
 Example:
 
