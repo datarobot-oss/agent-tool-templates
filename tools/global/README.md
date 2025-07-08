@@ -32,30 +32,44 @@ Below are instructions on how to make predictions after the tool has been deploy
 
 - **Using python prediction code snippet**
     
-    After deployment, invoke the tool by making unstructured prediction requests to DataRobot. 
-    Use the [prediction API code snippet](https://docs.datarobot.com/en/docs/predictions/realtime/code-py.html) with the specified request format. An auto-generated code snippet is also available in the `Predictions` tab of the model deployment in the DataRobot UI. 
-    For further details, refer to the [documentation on unstructured model predictions](https://docs.datarobot.com/en/docs/api/reference/predapi/pred-ref/dep-pred-unstructured.html). 
+    After deployment, you can invoke the tool by making unstructured prediction requests to DataRobot. 
+    Use the [prediction API code snippet](https://docs.datarobot.com/en/docs/predictions/realtime/code-py.html) and provide `request.json` file that matches the tool's specific input schema. 
+    Details about the required input for each tool are available in the "Input schema" section its README. 
+    An auto-generated code snippet is also available in the "Predictions" tab of the model deployment in the DataRobot UI. 
+    For further details, see the [documentation on unstructured model predictions](https://docs.datarobot.com/en/docs/api/reference/predapi/pred-ref/dep-pred-unstructured.html). 
 
 
 - **Using `curl`**
 
-    First prepare variables related to our deployment and datarobot instance:
+    First prepare variables related to your deployment and datarobot instance:
 
     ```bash
     export API_KEY='<your-datarobot-api-key>'
-    export DR_KEY='<datarobot-key>' 
     export DEPLOYMENT_ID='<tool-deployment-id>'
-    ```
   
-    For more information about deployment prediction headers, see [the documentation](https://docs.datarobot.com/en/docs/api/reference/predapi/pred-ref/dep-pred.html#headers).  
+    # only required for dedicated prediction environments (skip for serverless)
+    export DR_KEY='<your-datarobot-key>' 
+    ```
+      
     Once your variables are set, you can make a prediction request using the following `curl` command. The `request.json` file should contain the input data specific to the tool you are using. 
     For details on the required input structure, refer to the tool's README file.
     
-    ```bash
-    curl -i -X POST "https://example.datarobot.com/predApi/v1.0/deployments/${DEPLOYMENT_ID}/predictionsUnstructured" \
-        -H "Authorization: Bearer ${API_KEY}" \
-        -H "DataRobot-Key: ${DR_KEY}" \
-        --data @/path/to/request.json
-    ```
+    - Command for serverless prediction environments:
 
+      ```bash
+      curl -i -X POST "https://example.datarobot.com/api/v2/deployments/${DEPLOYMENT_ID}/predictionsUnstructured" \
+          -H "Authorization: Bearer ${API_KEY}" \
+          --data @/path/to/request.json
+      ```
+
+    - Command for dedicated prediction environments:
+  
+      ```bash
+      curl -i -X POST "https://example.datarobot.com/predApi/v1.0/deployments/${DEPLOYMENT_ID}/predictionsUnstructured" \
+          -H "Authorization: Bearer ${API_KEY}" \
+          -H "DataRobot-Key: ${DR_KEY}" \
+          --data @/path/to/request.json
+      ```
+
+For more information about deployment prediction headers, see [the documentation](https://docs.datarobot.com/en/docs/api/reference/predapi/pred-ref/dep-pred.html#headers).
     
