@@ -5,7 +5,7 @@ This tool is designed to search for datasets in the AI Catalog using a search qu
 For implementation details, please refer to the [custom_model](./custom_model) directory and `custom.py` file.
 
 ## How to call the tool
-To call or invoke the tool, send a properly formatted JSON request to the deployed model’s prediction endpoint in DataRobot using its API; the model processes your input and returns a prediction or summary, and this can be done programmatically via scripts, command-line tools like `curl`, or integrated into applications.
+To call or invoke the tool, send a properly formatted JSON request to the deployed model’s prediction endpoint in DataRobot using its API; the model processes your input and returns a prediction or summary. This can be done programmatically via scripts, command-line tools like `curl`, or integrated into applications.
 
 Please refer to the [making predictions](../README.md#making-predictions) section of documentation for global tools for more technical details on how to call the tool.
 
