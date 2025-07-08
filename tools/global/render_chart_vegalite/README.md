@@ -21,7 +21,7 @@ Example:
 ```json
 {
     "payload": {
-        "vegalite_spec": '{"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "description": "A simple point chart for the IRIS dataset", "data": "683ee07e7e96db41ab02b263", "mark": {"type": "point"}, "encoding": {"x": {"field": "sepal length (cm)", "type": "quantitative"}, "y": {"field": "sepal width (cm)", "type": "quantitative"}, "color": {"field": "species", "type": "nominal"}}, "width": 400, "height": 300}'}
+        "vegalite_spec": "{\"$schema\": \"https://vega.github.io/schema/vega-lite/v5.json\", \"description\": \"A simple point chart for the IRIS dataset\", \"data\": \"683ee07e7e96db41ab02b263\", \"mark\": {\"type\": \"point\"}, \"encoding\": {\"x\": {\"field\": \"sepal length (cm)\", \"type\": \"quantitative\"}, \"y\": {\"field\": \"sepal width (cm)\", \"type\": \"quantitative\"}, \"color\": {\"field\": \"species\", \"type\": \"nominal\"}}, \"width\": 400, \"height\": 300}"
     }
 }
 ```
