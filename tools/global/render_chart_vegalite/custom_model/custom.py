@@ -45,8 +45,8 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
     # Extract search parameters from payload
     payload = request.get("payload", {})
 
+    # Call the tool
     result = tool.vegalite_chart_rendering(**payload)
     response = {"result": result}
 
     return json.dumps(response), {"mimetype": "application/json", "charset": "utf-8"}
-

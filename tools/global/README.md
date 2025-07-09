@@ -13,16 +13,16 @@ Each subdirectory contains a standalone custom model implementation for a global
 
 List of Global Tools:
 
-| **Tool Name**                                                  | **Description**                                                                                                   |
-|----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| [get_ai_catalog_dataset](./get_ai_catalog_dataset)             | Retrieves datasets from the DataRobot AI Catalog using a `dataset_id`. Returns the dataset in CSV format as raw bytes. |
-| [make_ml_predictions](./make_ml_predictions)                   | Performs machine learning predictions using a specified model. Accepts input data and returns prediction results. |
+| **Tool Name**                                                  | **Description**                                                                                                                         |
+|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| [get_data_registry_dataset](./get_data_registry_dataset)       | Retrieves datasets from the DataRobot Data Registry using a `dataset_id`. Returns the dataset in CSV format as raw bytes.               |
+| [make_ml_predictions](./make_ml_predictions)                   | Performs machine learning predictions using a specified model. Accepts input data and returns prediction results.                       |
 | [make_textgen_predictions](./make_textgen_predictions)         | Generates text predictions based on input data using a text generation model. Suitable for tasks like summarization or text completion. |
-| [make_time_series_predictions](./make_time_series_predictions) | Produces time series predictions using a specified model. Useful for forecasting and trend analysis.              |
-| [render_chart_plotly](./render_chart_plotly)                   | Creates interactive charts using Plotly based on input data and configuration. Returns a rendered chart object.   |
-| [render_chart_vegalight](./render_chart_vegalight)             | Generates a chart from a Vega-Lite specification and returns a JSON with a base64-encoded image of the chart.     |
-| [search_ai_catalog](./search_ai_catalog)                       | Searches for datasets in the DataRobot AI Catalog using search terms. Returns matching datasets as a DataFrame.   |
-| [summarize_dataframe](./summarize_dataframe)                   | Provides a detailed summary of a pandas DataFrame in Markdown format, including statistics and data insights.     |
+| [make_time_series_predictions](./make_time_series_predictions) | Produces time series predictions using a specified model. Useful for forecasting and trend analysis.                                    |
+| [render_chart_plotly](./render_chart_plotly)                   | Creates interactive charts using Plotly based on input data and configuration. Returns a rendered chart object.                         |
+| [render_chart_vegalight](./render_chart_vegalight)             | Generates a chart from a Vega-Lite specification and returns a JSON with a base64-encoded image of the chart.                           |
+| [search_data_registry](./search_data_registry)                 | Searches for datasets in the DataRobot Data Registry using search terms. Returns matching datasets as a DataFrame.                      |
+| [summarize_dataframe](./summarize_dataframe)                   | Provides a detailed summary of a pandas DataFrame in Markdown format, including statistics and data insights.                           |
 
 ## Using tools
 To make use of the tool, you need to deploy it in DataRobot instance and then invoke it using the prediction API.

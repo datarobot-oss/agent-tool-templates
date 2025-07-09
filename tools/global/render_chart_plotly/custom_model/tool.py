@@ -51,8 +51,8 @@ def find_placeholders(spec_str: str) -> list[str]:
     return re.findall(r"\{\{(.*?)\}\}", spec_str)
 
 
-def get_dataframe_from_ai_catalog(dataset_id: str) -> pd.DataFrame:
-    """Returns a pandas DataFrame from the AI Catalog using the provided dataset ID."""
+def get_dataframe_from_data_registry(dataset_id: str) -> pd.DataFrame:
+    """Returns a pandas DataFrame from the Data Registry using the provided dataset ID."""
     return dr.Dataset.get(dataset_id).get_as_dataframe().dropna()
 
 
@@ -79,7 +79,7 @@ def plotly_chart_rendering(plotly_spec: str, dataset_id: str, max_samples: int =
     Do not escape the plotly_spec string.
 
     You need to pass in a "dataset_id" to this function, which identifies an
-    existing dataset within AI Catalog. Then you can reference columns from the
+    existing dataset within Data Registry. Then you can reference columns from the
     dataframe by wrapping them in double curly braces. For instance if you pass
     in the following specification:
 
@@ -110,7 +110,7 @@ def plotly_chart_rendering(plotly_spec: str, dataset_id: str, max_samples: int =
     plotly_spec: str
         the Plotly JSON specification.
     dataset_id: str
-        the dataset_id of the AI Catalog dataset to use.
+        the dataset_id of the Data Registry dataset to use.
     max_samples: int
         the maximum number of samples to use. Default is 10000.
 
@@ -121,14 +121,14 @@ def plotly_chart_rendering(plotly_spec: str, dataset_id: str, max_samples: int =
     """
     if not ObjectId.is_valid(dataset_id):
         raise ValueError(
-            "Parameter 'dataset_id' must be a valid ObjectId of an existing dataset in the AI Catalog."
+            "Parameter 'dataset_id' must be a valid ObjectId of an existing dataset in the Data Registry."
         )
 
-    logger.debug(f"Retrieving dataset {dataset_id} from AI Catalog")
+    logger.debug(f"Retrieving dataset {dataset_id} from Data Registry")
 
-    # Retrieve the dataset from AI Catalog for visualization
+    # Retrieve the dataset from Data Registry for visualization
     try:
-        df = get_dataframe_from_ai_catalog(dataset_id)
+        df = get_dataframe_from_data_registry(dataset_id)
         if max_samples and len(df) > max_samples:
             df = df.sample(max_samples, random_state=42)
             logger.debug(f"Sampled dataset to {max_samples} rows")

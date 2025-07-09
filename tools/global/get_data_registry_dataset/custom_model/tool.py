@@ -17,10 +17,10 @@ import datarobot as dr
 import pandas as pd
 
 
-def get_ai_catalog_dataset(
+def get_data_registry_dataset(
     dataset_id: str, offset: int = 0, limit: Optional[int] = None
 ) -> pd.DataFrame:
-    """Fetches a dataset from the DataRobot AI Catalog.
+    """Fetches a dataset from the DataRobot Data Registry.
 
     Parameters
     ----------

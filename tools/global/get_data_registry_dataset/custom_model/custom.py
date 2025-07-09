@@ -34,7 +34,7 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
 
     Args:
         model: Loaded model from load_model() hook.
-        data: Incoming JSON data containing search parameters
+        data: Incoming JSON data containing "dataset_id" in the "payload" key
         kwargs: Additional keyword arguments.
 
     Returns:
@@ -46,8 +46,8 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
     # Extract search parameters from payload
     payload = request.get("payload", {})
 
-    datasets = tool.search_ai_catalog_datasets(**payload)
-    response = {"datasets": datasets}
+    # Call the tool
+    df = tool.get_data_registry_dataset(**payload)
+    csv = df.to_csv(index=False)
 
-    return json.dumps(response), {"mimetype": "application/json", "charset": "utf-8"}
-
+    return csv, {"mimetype": "text/csv", "charset": "utf-8"}

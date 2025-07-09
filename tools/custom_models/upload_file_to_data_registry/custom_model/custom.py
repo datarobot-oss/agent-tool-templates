@@ -57,7 +57,7 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
         dataframe = pd.read_csv(datafile)
     file_name = payload.get("file_name")
 
-    created_dataset_id = tool.upload_file_to_ai_catalog(
+    created_dataset_id = tool.upload_file_to_data_registry(
         file_path=file_path,
         dataframe=dataframe,
         file_name=file_name,
