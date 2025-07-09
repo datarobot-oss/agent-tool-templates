@@ -4,7 +4,7 @@ description: |
   specification.
   
   NOTE: When performing an analysis, you can generate a Vega-Lite chart by simply passing 
-  in the specification in JSON. For the data, you can pass the AI Catalog "dataset_id" as 
+  in the specification in JSON. For the data, you can pass the Data Registry "dataset_id" as 
   the dataset. The model will retrieve the data and visualize it.
 
 type: inference

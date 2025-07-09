@@ -5,7 +5,7 @@ description: |
   
   NOTE: When generating the Plotly chart, placeholders in the specification—marked with 
   double curly braces enclosing a column name (e.g., `{{column_name}}`) — will be replaced 
-  with the corresponding values from the specified column in the AI Catalog dataset. 
+  with the corresponding values from the specified column in the Data Registry dataset. 
   The dataset is identified by the `dataset_id` input parameter.
 
 type: inference

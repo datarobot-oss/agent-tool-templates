@@ -1,6 +1,6 @@
-name: "[Tool] Get AI Catalog Dataset"
+name: "[Tool] Get Data Registry Dataset"
 description: |
-  Fetches a dataset from the DataRobot AI Catalog.
+  Fetches a dataset from the DataRobot Data Registry.
 
 type: inference
 environmentID: 64d2ba178dd3f0b1fa2162f0

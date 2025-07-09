@@ -19,8 +19,8 @@ import datarobot as dr
 
 
 @lru_cache(maxsize=1000)
-def search_ai_catalog_datasets(search_terms: str = "", limit: int = 20) -> List[Dict[str, str]]:
-    """Lists datasets from the DataRobot AI catalog matching the search terms.
+def search_data_registry_datasets(search_terms: str = "", limit: int = 20) -> List[Dict[str, str]]:
+    """Lists datasets from the DataRobot Data Registry matching the search terms.
 
     NOTE: DataRobot does not do fuzzy matching so if you do not get the exact results you expect, try a more specific search term.
 
