@@ -1,0 +1,6 @@
+description: |
+  Federalized release file for agent-tool-templates.
+
+tags:
+  - name: "release/{version}-branchpoint"
+    value: "Branchpoint tag for {version} - via RELEASE.yaml"
