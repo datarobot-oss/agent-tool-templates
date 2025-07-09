@@ -83,7 +83,7 @@ async def prepare_prediction_data(
         Registered model version
     X : pandas.DataFrame or str
         Dataset to compute predictions on; target column can be included
-        or omitted. If str, can be AI catalog dataset id or name (if unambiguous)
+        or omitted. If str, can be Data Registry dataset id or name (if unambiguous)
     as_of : str or datetime, optional
         The date on which forecasting is performed, by default None
     for_dates : str or datetime or tuple of str or datetime, optional

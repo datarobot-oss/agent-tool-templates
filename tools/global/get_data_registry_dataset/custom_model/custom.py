@@ -46,8 +46,26 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
     # Extract search parameters from payload
     payload = request.get("payload", {})
 
-    df = tool.get_ai_catalog_dataset(**payload)
+    # Call the tool
+    df = tool.get_data_registry_dataset(**payload)
     csv = df.to_csv(index=False)
 
     return csv, {"mimetype": "text/csv", "charset": "utf-8"}
 
+
+def test_score_unstructured():
+    """Test function for the score_unstructured hook."""
+    payload = {
+        "dataset_id": "65f07dec42d762a299cdebc7",
+    }
+
+    auth_ctx = {"user": {"id": "12345", "name": "Test User"}, "conns": []}
+
+    data = {"payload": payload, "authorization_context": auth_ctx}
+
+    response_content, response_headers = score_unstructured("model", json.dumps(data))
+    print("Response Content:", response_content)
+
+
+if __name__ == "__main__":
+    test_score_unstructured()

@@ -1,6 +1,6 @@
-name: "[Tool] Search AI Catalog"
+name: "[Tool] Search Data Registry"
 description: |
-  Search datasets from the DataRobot AI catalog matching the search terms.
+  Search datasets from the DataRobot Data Registry matching the search terms.
 
   NOTE: DataRobot does not do fuzzy matching so if you do not get the exact results you expect, try a more specific search term.
 

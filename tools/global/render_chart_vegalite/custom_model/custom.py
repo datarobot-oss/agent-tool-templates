@@ -45,8 +45,41 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
     # Extract search parameters from payload
     payload = request.get("payload", {})
 
+    # Call the tool
     result = tool.vegalite_chart_rendering(**payload)
     response = {"result": result}
 
     return json.dumps(response), {"mimetype": "application/json", "charset": "utf-8"}
 
+
+def test_score_unstructured():
+    """Test function for the score_unstructured hook."""
+    payload = {
+        "vegalite_spec": json.dumps(
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "description": "A simple point chart for the IRIS dataset",
+                "data": "683ee07e7e96db41ab02b263",  # This should be the DataRobot dataset ID
+                "mark": {"type": "point"},
+                "encoding": {
+                    "x": {"field": "sepal length (cm)", "type": "quantitative"},
+                    "y": {"field": "sepal width (cm)", "type": "quantitative"},
+                    "color": {"field": "species", "type": "nominal"},
+                },
+                "width": 400,
+                "height": 300,
+            }
+        )
+    }
+
+    auth_ctx = {"user": {"id": "12345", "name": "Test User"}, "conns": []}
+
+    data = {"payload": payload, "authorization_context": auth_ctx}
+
+    response_content, response_headers = score_unstructured("model", json.dumps(data))
+    print("Response Content:", response_content)
+    print("Response Headers:", response_headers)
+
+
+if __name__ == "__main__":
+    test_score_unstructured()

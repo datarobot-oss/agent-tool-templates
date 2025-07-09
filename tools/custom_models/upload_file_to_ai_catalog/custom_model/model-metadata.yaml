@@ -1,6 +1,6 @@
-name: "[Tool] Upload File to AI Catalog"
+name: "[Tool] Upload File to Data Registry"
 description: |
-  Uploads a file to the AI Catalog.
+  Uploads a file to the Data Registry.
 
   The file can be provider either as a file_path or a pandas dataframe.
 

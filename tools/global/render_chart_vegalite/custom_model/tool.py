@@ -207,8 +207,8 @@ def correct_field_capitalization(spec, dataframe):
     return corrected_spec
 
 
-def get_dataframe_from_ai_catalog(dataset_id: str) -> pd.DataFrame:
-    """Returns a pandas DataFrame from the AI Catalog using the provided dataset ID."""
+def get_dataframe_from_data_registry(dataset_id: str) -> pd.DataFrame:
+    """Returns a pandas DataFrame from the Data Registry using the provided dataset ID."""
     return dr.Dataset.get(dataset_id).get_as_dataframe()
 
 
@@ -216,7 +216,7 @@ def vegalite_chart_rendering(vegalite_spec: str) -> str:
     """Returns base64-encoded image of a chart from the input vega-lite specification.
 
     When you perform an analysis you can generate a vega-lite chart just by passing in
-    the specification in JSON. If needed you can pass in the AI catalog "dataset_id"
+    the specification in JSON. If needed you can pass in the Data Registry "dataset_id"
     as the dataset, and the model will retrieve the data.
 
     For instance if you pass in the following specification:
@@ -237,7 +237,7 @@ def vegalite_chart_rendering(vegalite_spec: str) -> str:
     }
     ```
 
-    I will recognize the ObjectId and replace it with the dataset from AI Catalog as needed.
+    I will recognize the ObjectId and replace it with the dataset from Data Registry as needed.
 
     Parameters
     ----------
@@ -271,11 +271,11 @@ def vegalite_chart_rendering(vegalite_spec: str) -> str:
     if dataset_id is None:
         raise ValueError(
             "The 'data' field in the Vega-Lite specification must contain a valid dataset_id. "
-            "Provide either a string representing the ObjectId of the dataset from the AI Catalog, "
+            "Provide either a string representing the ObjectId of the dataset from the Data Registry, "
             "or a dictionary with a named dataset where the value is a valid ObjectId."
         )
 
-    df = get_dataframe_from_ai_catalog(dataset_id)
+    df = get_dataframe_from_data_registry(dataset_id)
     spec = correct_specification_for_data(spec, df)
 
     # Validate the specification and assign the data

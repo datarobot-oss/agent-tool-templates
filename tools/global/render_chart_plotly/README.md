@@ -1,6 +1,6 @@
 # Render Plotly Chart Tool
 
-This tool is designed to generate Plotly charts based on the dataset from the AI catalog.
+This tool is designed to generate Plotly charts based on the dataset from the Data Registry.
 
 For implementation details, please refer to the [custom_model](./custom_model) directory and `custom.py` file.
 
@@ -15,7 +15,7 @@ When invoking the tool, provide a JSON request as input. The JSON request must i
 
 **Payload parameters**:
 - `plotly_spec` (string): The Plotly JSON specification, serialized as a string.  
-  You can reference columns from the dataframe (loaded from AI Catalog using the `dataset_id` parameter) by wrapping them in double curly braces, e.g., `{{column_name}}`. Example usage, where `{{x}}` and `{{y}}` will be replaced with the actual data from the dataset:
+  You can reference columns from the dataframe (loaded from Data Registry using the `dataset_id` parameter) by wrapping them in double curly braces, e.g., `{{column_name}}`. Example usage, where `{{x}}` and `{{y}}` will be replaced with the actual data from the dataset:
 
   ```json
   {
@@ -32,7 +32,7 @@ When invoking the tool, provide a JSON request as input. The JSON request must i
       // ...
     }
   }
-- `datset_id` (string): The ID of the dataset in the AI catalog. It identifies an existing dataset within AI Catalog.
+- `datset_id` (string): The ID of the dataset in the Data Registry. It identifies an existing dataset within Data Registry.
 - `max_samples` (integer, optional, default 10000): The maximum number of samples to use.
 
 Example:

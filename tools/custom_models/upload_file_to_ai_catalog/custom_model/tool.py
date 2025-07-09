@@ -23,12 +23,12 @@ from file_storage_backend import get_file_storage_backend
 logger = getLogger(__name__)
 
 
-def upload_file_to_ai_catalog(
+def upload_file_to_data_registry(
     file_path: Optional[str] = None,
     dataframe: Optional[pd.DataFrame] = None,
     file_name: Optional[str] = None,
 ) -> str:
-    """Uploads a file to the AI Catalog.
+    """Uploads a file to the Data Registry.
 
     You must provide either a file path or a dataframe.
 
@@ -39,12 +39,12 @@ def upload_file_to_ai_catalog(
     dataframe : pd.DataFrame
         a pandas dataframe to upload
     file_name : str
-        name of the target file to create in the AI Catalog
+        name of the target file to create in the Data Registry
 
     Returns
     -------
     str
-        dataset ID of the uploaded file in the AI Catalog
+        dataset ID of the uploaded file in the Data Registry
     """
     if not file_path and dataframe is None:
         raise ValueError("You must provide either a dataframe or an file_path")
