@@ -30,13 +30,17 @@ from datarobotx.common.types import TimeSeriesPredictParams
 from ts_data_quality import DataQualityCheck
 
 logger = logging.getLogger(__name__)
-client = dr.Client()
-HEADERS = client.headers
+
+
+def get_client() -> dr.Client:
+    client = dr.Client()
+    return client
 
 
 async def get(endpoint: str) -> Dict[str, Any]:
+    client = get_client()
     async with aiohttp.ClientSession() as session:
-        async with session.get(f"{client.endpoint}/{endpoint}", headers=HEADERS) as resp:
+        async with session.get(f"{client.endpoint}/{endpoint}", headers=client.headers) as resp:
             return await resp.json()
 
 
@@ -51,9 +55,9 @@ async def get_datetime_partitioning(project_id: str) -> Dict[str, Any]:
 def _validate_dataframe(X: pd.DataFrame, ts_project_settings: Dict[str, Any]) -> None:
     target_col = ts_project_settings.get("target").replace(" (actual)", "")
     assert isinstance(X, pd.DataFrame), "X must be a pandas DataFrame"
-    assert ts_project_settings["datetimePartitionColumn"] in X.columns, (
-        f"Dataset must have a datetime partition column: {ts_project_settings['datetimePartitionColumn']}"
-    )
+    assert (
+        ts_project_settings["datetimePartitionColumn"] in X.columns
+    ), f"Dataset must have a datetime partition column: {ts_project_settings['datetimePartitionColumn']}"
     if ts_project_settings.get("multiseriesIdColumns"):
         for series_col in ts_project_settings["multiseriesIdColumns"]:
             series_col = series_col.replace(" (actual)", "")
@@ -207,26 +211,26 @@ def _validate_time_series_predict_args(
     maximum_forecast_date = ts_project_settings["maximumForecastDate"]
 
     if as_of is not None:
-        assert pd.to_datetime(as_of, utc=True) >= minimum_forecast_point, (
-            f"Invalid as_of date: {as_of}. Must be after {minimum_forecast_point}"
-        )
-        assert pd.to_datetime(as_of, utc=True) <= maximum_forecast_date, (
-            f"Invalid as_of date: {as_of}. Must be before {maximum_forecast_date}"
-        )
+        assert (
+            pd.to_datetime(as_of, utc=True) >= minimum_forecast_point
+        ), f"Invalid as_of date: {as_of}. Must be after {minimum_forecast_point}"
+        assert (
+            pd.to_datetime(as_of, utc=True) <= maximum_forecast_date
+        ), f"Invalid as_of date: {as_of}. Must be before {maximum_forecast_date}"
 
     elif for_dates is not None:
         for_dates = (for_dates, for_dates) if isinstance(for_dates, str) else for_dates
-        assert max(pd.to_datetime(for_dates, utc=True)) <= maximum_forecast_date, (
-            f"Invalid for_dates: {for_dates} asks for predictions after latest possible date {maximum_forecast_date}"
-        )
+        assert (
+            max(pd.to_datetime(for_dates, utc=True)) <= maximum_forecast_date
+        ), f"Invalid for_dates: {for_dates} asks for predictions after latest possible date {maximum_forecast_date}"
         assert min(pd.to_datetime(for_dates, utc=True)) > minimum_forecast_point, (
             f"Invalid for_dates: {for_dates} for dates must all be after the minimum forecast point "
             + f"{minimum_forecast_point}"
         )
 
-    assert as_of is None or for_dates is None, (
-        "Cannot specify both as_of and for_dates in a single request."
-    )
+    assert (
+        as_of is None or for_dates is None
+    ), "Cannot specify both as_of and for_dates in a single request."
 
 
 def _get_time_series_parameters(

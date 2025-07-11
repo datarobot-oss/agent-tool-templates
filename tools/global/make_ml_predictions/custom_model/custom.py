@@ -44,7 +44,7 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
         kwargs: Additional keyword arguments.
 
     Returns:
-        JSON response with search results
+        predictions in CSV format, along with headers indicating the content type.
     """
     request = json.loads(data)
 
@@ -62,12 +62,13 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
         datafile = StringIO(payload["input_dataframe"])
         input_dataframe = pd.read_csv(datafile)
 
-    rv = tool.make_datarobot_ml_predictions(
+    # Call the tool
+    csv = tool.make_datarobot_ml_predictions(
         deployment_id=deployment_id,
         columns_to_return_with_predictions=columns_to_return_with_predictions,
         input_data_json_str=input_data_json_str,
         input_dataframe=input_dataframe,
     )
 
-    return json.dumps(rv), {"mimetype": "application/json", "charset": "utf-8"}
+    return csv, {"mimetype": "text/csv", "charset": "utf-8"}
 

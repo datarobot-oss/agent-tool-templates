@@ -14,10 +14,9 @@
 
 import logging
 
+from env import config
 from openai import AsyncAzureOpenAI
 from openai import AsyncOpenAI
-
-from env import config
 
 logger = logging.getLogger(__name__)
 
