@@ -38,7 +38,7 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
         kwargs: Additional keyword arguments.
 
     Returns:
-        JSON response with search results
+        dataset in a csv format
     """
     request = json.loads(data)
 

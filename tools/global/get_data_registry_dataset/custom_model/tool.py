@@ -22,10 +22,18 @@ def get_data_registry_dataset(
 ) -> pd.DataFrame:
     """Fetches a dataset from the DataRobot Data Registry.
 
+    To paginate results, use the `limit` and `offset` parameters.
+    These allow you to retrieve a specific range of rows from the
+    dataset or process the dataset in manageable chunks.
+
     Parameters
     ----------
     dataset_id : str
         the unique dataset id of the dataset from datarobot.
+    offset : int, optional
+        the number of rows to skip, by default 0.
+    limit: int, optional
+        the maximum number of rows to return, by default None (returns all rows).
 
     Returns
     -------

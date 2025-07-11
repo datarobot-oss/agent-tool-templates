@@ -14,7 +14,6 @@
 
 import aiohttp
 import datarobot as dr
-
 from env import config
 
 HEADERS = dr.Client(token=config.DATAROBOT_API_TOKEN, endpoint=config.DATAROBOT_ENDPOINT).headers

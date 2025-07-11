@@ -21,11 +21,9 @@ from typing import Any
 from typing import Dict
 from typing import List
 from typing import Optional
-from typing import Union
 
 import datarobot as dr
 import pandas as pd
-from data_types import Markdown
 from data_types import extract_and_sanitize_json
 from datarobot_predict import TimeSeriesType
 from datarobot_predict.deployment import predict
@@ -44,7 +42,7 @@ def make_datarobot_ts_predictions(
     input_data_json_str: str = None,
     input_dataframe: pd.DataFrame = None,
     rmv: dr.models.model_registry.registered_model.RegisteredModelVersion = None,
-) -> Markdown:
+) -> str:
     """Make forecasts from a time series model.
 
     Prior to using this tool, verify that you have all the data needed. Time Series models require a forecast point. They also have specific requirements for the input data.
@@ -73,7 +71,7 @@ def make_datarobot_ts_predictions(
     Returns
     -------
     str
-        the predictions formatted as a pandas dataframe.
+        the predictions formatted as a pandas dataframe in a csv format.
 
     Source
     ______
@@ -221,11 +219,8 @@ async def summarize_expls(in_df: pd.DataFrame, expl_features, deployment_desc: s
     return content["summaries"]
 
 
-def return_markdown(df: pd.DataFrame, limit: int = 50) -> Union[Markdown, pd.DataFrame]:
-    if len(df) < limit:
-        return Markdown(df.to_markdown())
-    else:
-        return df
+def return_formatted(df: pd.DataFrame) -> str:
+    return df.to_csv(index=False)
 
 
 def format_predictions(
@@ -236,13 +231,13 @@ def format_predictions(
     columns_to_return_with_predictions: List[str] = None,
     pred_expl_limit: int = 50,
     model_info: Optional[Dict[str, Any]] = None,
-) -> Union[Markdown, pd.DataFrame]:
+) -> str:
     try:
         pf = PredictionFormatter(df, deployment, model_info=model_info)
         formatted_df = pf.format()
     except Exception as e:
         logger.error(e)
-        return return_markdown(df)
+        return return_formatted(df)
 
     try:
         formatted_df = formatted_df.loc[formatted_df.prediction.notna()]
@@ -316,4 +311,4 @@ def format_predictions(
         return_frame = return_frame.loc[return_frame.prediction.notna()]
     except Exception as e:
         logger.error(e)
-    return return_markdown(return_frame)
+    return return_formatted(return_frame)

@@ -46,7 +46,7 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
         kwargs: Additional keyword arguments.
 
     Returns:
-        JSON response with search results
+        predictions in CSV format, along with headers indicating the content type.
     """
     request = json.loads(data)
 
@@ -67,7 +67,8 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
     leaderboard_model_id = payload["registered_model_version_leaderboard_model_id"]
     rmv = RegisteredModelVersion.create_for_leaderboard_item(model_id=leaderboard_model_id)
 
-    rv = tool.make_datarobot_ts_predictions(
+    # Call the tool
+    csv = tool.make_datarobot_ts_predictions(
         deployment_id=deployment_id,
         forecast_point=forecast_point,
         columns_to_return_with_predictions=columns_to_return_with_predictions,
@@ -76,4 +77,4 @@ def score_unstructured(model, data: Union[bytes, str], **kwargs):
         rmv=rmv,
     )
 
-    return json.dumps(rv), {"mimetype": "application/json", "charset": "utf-8"}
+    return csv, {"mimetype": "text/csv", "charset": "utf-8"}

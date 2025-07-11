@@ -16,40 +16,7 @@ from __future__ import annotations
 import json
 import logging
 
-import typing_extensions as te
-from markupsafe import Markup
-
 logger = logging.getLogger(__name__)
-
-
-class Markdown(Markup):
-    """A class for handling Markdown-formatted text with XML annotations.
-    This class extends the Markup class to wrap Markdown content in XML tags for proper
-    rendering in the streaming output.
-    Parameters
-    ----------
-    in_obj : str, optional
-        The Markdown-formatted text to be wrapped, by default ""
-    encoding : str or None, optional
-        The encoding to use for the text, by default None
-    errors : str, optional
-        How to handle encoding errors, by default "strict"
-    Returns
-    -------
-    Markdown
-        A new instance of the Markdown class with the content wrapped in XML tags
-    Examples
-    --------
-    >>> md = Markdown("# Header\\nSome text")
-    >>> print(md)
-    <markdown># Header\nSome text</markdown>
-    """
-
-    def __new__(
-        cls, in_obj: str = "", encoding: str | None = None, errors: str = "strict"
-    ) -> te.Self:
-        obj = f"""<markdown>{in_obj}</markdown>"""
-        return super().__new__(cls, obj, encoding, errors)
 
 
 def extract_and_sanitize_json(text: str) -> dict:
