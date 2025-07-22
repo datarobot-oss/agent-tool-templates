@@ -21,5 +21,3 @@
 
   paths-ignore:
     - '**/__init__.py'
-
-  comment: on-failure
