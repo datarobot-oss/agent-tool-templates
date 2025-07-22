@@ -1,0 +1,22 @@
+name: Checks
+
+on:
+  push:
+    branches: ["main"]
+
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  copyright:
+    runs-on: ubuntu-latest
+    name: Copyrights
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Check License Header
+        uses: apache/skywalking-eyes/header@main
+        with:
+          config: .licenserc.yaml
