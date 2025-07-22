@@ -17,7 +17,8 @@
        limitations under the License.
 
   paths:
-    - '**/*.py'
+    - 'scripts/'
+    - 'tools/'
 
   paths-ignore:
     - '**/__init__.py'
