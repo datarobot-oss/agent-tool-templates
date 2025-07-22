@@ -17,7 +17,9 @@
        limitations under the License.
 
   paths:
-    - '/**/*.py'
+    - '**/*.py'
 
   paths-ignore:
     - '**/__init__.py'
+
+  comment: on-failure
