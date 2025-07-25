@@ -64,7 +64,7 @@ def make_datarobot_text_gen_predictions(input_message: str, deployment_id: str) 
                     context.append(
                         {
                             "citation_source": df.iloc[0][f"CITATION_SOURCE_{i}_OUTPUT"],
-                            "ciation_output": df.iloc[0][f"CITATION_CONTENT_{i}_OUTPUT"],
+                            "citation_output": df.iloc[0][f"CITATION_CONTENT_{i}_OUTPUT"],
                         }
                     )
             except Exception as e:
